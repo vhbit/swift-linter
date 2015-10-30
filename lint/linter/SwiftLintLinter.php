@@ -48,8 +48,8 @@ final class SwiftLintLinter extends ArcanistExternalLinter {
 
   protected function getMandatoryFlags() {
     return array(
-        "lint",
-        "--path"
+        'lint',
+        '--path',
     );
   }
 
