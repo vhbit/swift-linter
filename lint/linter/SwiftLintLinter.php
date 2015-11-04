@@ -56,7 +56,7 @@ final class SwiftLintLinter extends ArcanistExternalLinter {
   protected function parseLinterOutput($path, $err, $stdout, $stderr) {
     $ok = ($err == 0);
 
-    $lines = phutil_split_lines($stderr, false);
+    $lines = phutil_split_lines($stdout, false);
 
     $messages = array();
     foreach ($lines as $line) {
