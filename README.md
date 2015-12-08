@@ -22,7 +22,7 @@ You can add this repository as a git submodule and in this case
 
 ```json
 {
-  "load": "path/to/submodule"
+  "load": ["path/to/submodule"]
   // ...
 }
 ```
@@ -47,7 +47,7 @@ In this case you `.arcconfig` should look like
 
 ```json
 {
-  "load": "swift-linter"
+  "load": ["swift-linter"]
   // ...
 }
 ```
@@ -62,7 +62,7 @@ git clone https://github.com/vhbit/swift-linter
 
 ```json
 {
-  "load": "~/.dev-tools/swift-linter"
+  "load": ["~/.dev-tools/swift-linter"]
   // ...
 }
 ```
