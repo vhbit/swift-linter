@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Uses the clang format to format C/C++/Obj-C code
+ * Uses swiftlint to check against GitHub Swift code style
  */
 final class SwiftLintLinter extends ArcanistExternalLinter {
 
