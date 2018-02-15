@@ -49,8 +49,28 @@ final class SwiftLintLinter extends ArcanistExternalLinter {
   protected function getMandatoryFlags() {
     return array(
         'lint',
-        '--path',
     );
+  }
+
+  protected function getPathArgumentForLinterFuture($path) {
+    // swiftlint up to 0.21 automatically searched for the best config
+    // but later it switched to use config from the current dir
+    // this is a better fix which allows config overwrite in subdirs.
+    // Unfortunately there is no better place to plug in than here
+    //
+    // We start from the analyzed file path and go up to the project
+    // root, using the first config available
+    $abs_path = FileSystem::resolvePath($path, $this->getProjectRoot());
+    $dirs = FileSystem::walkToRoot($abs_path, $this->getProjectRoot());
+    foreach ($dirs as $dir) {
+      $config_path = implode(DIRECTORY_SEPARATOR,
+                             array($dir, '.swiftlint.yml'));
+      if (FileSystem::pathExists($config_path)) {
+        return csprintf('--config %s --path %s', $config_path, $path);
+      }
+    }
+
+    return csprintf('--path %s', $path);
   }
 
   protected function parseLinterOutput($path, $err, $stdout, $stderr) {
