@@ -66,7 +66,7 @@ final class SwiftLintLinter extends ArcanistExternalLinter {
       $config_path = implode(DIRECTORY_SEPARATOR,
                              array($dir, '.swiftlint.yml'));
       if (FileSystem::pathExists($config_path)) {
-        return csprintf('--config %s --path %s', $config_path, $path);
+        return csprintf('--config %s %s', $config_path, $path);
       }
     }
 
